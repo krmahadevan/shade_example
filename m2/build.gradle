@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation project(path: ':m1', configuration: 'shadowConfig')
+    implementation 'org.testng:testng:7.4.0'
+}
