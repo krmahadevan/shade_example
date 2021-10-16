@@ -1,13 +1,8 @@
 plugins {
-    id 'java'
+    id 'java-library'
 }
-
-repositories {
-    mavenCentral()
-}
-
 
 dependencies {
-    implementation project(path: ':m1', configuration: 'shadowConfig')
+    implementation project(path: ':m1', configuration: 'shadow')
     implementation 'org.testng:testng:7.4.0'
 }

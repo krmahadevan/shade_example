@@ -1,38 +1,19 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
 
 plugins {
-    id 'java'
+    id 'java-library'
     id 'com.github.johnrengelman.shadow' version '7.1.0'
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.assertj/assertj-core
     implementation 'org.assertj:assertj-core:3.21.0'
-}
-
-project.configurations {
-    create('shadowConfig')
 }
 
 task relocateShadowJar(type: ConfigureShadowRelocation) {
     target = tasks.shadowJar
-    prefix = "rationale.emotions" // Default value is "shadow"
+    prefix = 'rationale.emotions'
 }
 
 shadowJar {
-    archiveClassifier.set('')
-    relocate('org.assertj', 'rationale.emotions.shadow.org.assertj') {
-        exclude 'org.testng'
-    }
     dependsOn(relocateShadowJar)
-}
-
-tasks {
-    build {
-        dependsOn(shadowJar, relocateShadowJar)
-    }
-}
-
-artifacts {
-    shadowConfig shadowJar.archiveFile
 }
